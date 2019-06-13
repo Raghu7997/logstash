@@ -71,11 +71,11 @@ filter {
 ```
 It will add new field "new_field_name" with value "pqr". Also removes the "xyz" field.
 
-- once you created the filter you need to colne the ESS/elastic-logstash-filters repo. Make a new branch from master followed by "<index-branch_name>".
+Once you created the filter you need to colne the ESS/elastic-logstash-filters repo. Make a new branch from master followed by \<jira-ticket-number\>-\<index-name>-\<message\>.
 
-- If the filter is already exist, you need to modified it, commit it and open a PR.
+If the filter is already exist, you need to modified it, commit it and open a PR. In reviwers add "imranm" & "t-davem".
 
-- If not then you need to create a new file with "500-output-<index>-filter.conf" name. Commit the changes and open a PR.
+If not then you need to create a new file with "500-output-\<index\>-filter.conf" name.
 
 Follow this template for the new file: 
 
@@ -87,52 +87,12 @@ filter {
 }
 ```
 
-make a new branch followed by,
+Push those filters into the new branch.
 
-push those filters into the new branch, 
-open a PR
-Just check the status of PR, If it fails check your filter and commit again
-The PR will be approved by the team and the filter will be updated in half an hour into Elasticsearch.
+Open a PR.
 
+In reviwers add "imranm" & "t-davem".
 
+Check the status of PR, If it fails then click on details which will give you desctiption. update your filter accourdingly and commit again.
 
-# Watcher Alerts in DES ELK:
-
-- To know more about creating watchers (alerts) in elasticsearch please refer to this page: https://wiki.autodesk.com/pages/viewpage.action?spaceKey=DES&title=Watcher+alerts+for+Elasticsearch
-
-To place the watcher into Elasticsearch, the user needs to clone the repo, and commit the alert body as shown in the template into the develop branch and create a pull request.
-
-The PR will be approved by the team and the job will post the watcher into Elasticsearch.
-
-Following is the template for the alert:
-```
-{
- "done": "false",
- "immediate_action": "none",   # Supports: none|execute|ack|activate|deactivate
- "watch" : {
-   "id": "<index_name>-xyz",
-   "watch" : {
-     <your watch definition here>    <--- Your watcher body goes here.
-   }
- }
-}
-```
-#### Attributes:
-
-- **done** : Set to false if you want to take an action or update the alert.
-- **immediate_action** : Set to the action that is to be taken after updating the alert.
-   
-   > Supported actions are:
-   > - none: https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html
-   > - execute: https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html
-   > - ack: https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html
-   > - activate: https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html
-   > - deactivate: https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html
-
-`Note`: `Actions execute/ack/actiavte/deactivate still post the alert. So any action taken will update the watcher first and then perform the action.`
-
-- **watch.id** : ID must begin with a letter or underscore and contain only letters, underscores, dashes, and numbers.
-
-`Note`: `The id should begin with index name, <index_name>-id. The filename should be same as id.`
-
-- **watch.watch** : The watch body as described [here](https://wiki.autodesk.com/pages/viewpage.action?spaceKey=DES&title=Watcher+alerts+for+Elasticsearch)
+After PR will be approved by the team filter will be updated in half an hour into Elasticsearch.
