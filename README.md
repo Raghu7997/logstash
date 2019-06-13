@@ -48,7 +48,7 @@ filter {
 
 ### Following is the example of a mutate filter:
 
-- The mutate filter allows you to perform general mutations on fields. You can rename, remove, replace, and modify fields in your events.
+The mutate filter allows you to perform general mutations on fields. You can rename, remove, replace, and modify fields in your events.
 
 For example, 
 
